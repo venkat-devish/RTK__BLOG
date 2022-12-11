@@ -4,10 +4,10 @@
   background-color: $--secondary-color;
   cursor: pointer;
   transition: all 0.4s;
-}
 
-.card-item:hover {
-  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .card-top {
