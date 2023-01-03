@@ -39,20 +39,22 @@ const postsSlice = createSlice({
       },
       prepare: (title, content, userId) => {
         const id = nanoid();
+        const reactions = {
+          thumbsUp: 0,
+          wow: 0,
+          heart: 0,
+          rocket: 0,
+          coffee: 0,
+        };
+        const date = new Date().toISOString();
         return {
           payload: {
             id,
             title,
-            date: new Date().toISOString(),
+            date,
             content,
             userId,
-            reactions: {
-              thumbsUp: 0,
-              wow: 0,
-              heart: 0,
-              rocket: 0,
-              coffee: 0,
-            },
+            reactions,
           },
         };
       },
