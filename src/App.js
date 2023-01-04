@@ -1,12 +1,21 @@
+import { Route, Routes } from "react-router";
 import AddPostForm from "./components/AddPostForm";
+import FullPost from "./components/FullPost";
 import PostsList from "./components/PostsList";
+import Layout from "./organisms/Layout";
 
 function App() {
   return (
-    <main className="App">
-      <AddPostForm />
-      <PostsList />
-    </main>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<PostsList />} />
+
+        <Route path="post">
+          <Route index element={<AddPostForm />} />
+          <Route path=":postId" element={<FullPost />} />
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 
