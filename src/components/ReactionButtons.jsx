@@ -28,7 +28,6 @@ const ReactionButtons = ({ post }) => {
       );
     }
   );
-  console.log(reactionButtonEmojis);
 
   return <div>{reactionButtonEmojis}</div>;
 };
