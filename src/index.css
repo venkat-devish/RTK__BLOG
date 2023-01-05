@@ -104,6 +104,12 @@ textarea {
   font-size: 1rem;
 }
 
+.header--link {
+  text-decoration: none;
+  height: 20px;
+  color: #fff;
+}
+
 .postCredit a,
 .postCredit a:visited {
   margin-right: 0.5rem;

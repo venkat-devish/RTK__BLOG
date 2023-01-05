@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { selectPostById } from "../features/postsSlice";
 import PostAuthor from "./PostAuthor";
 import ReactionButtons from "./ReactionButtons";
@@ -22,6 +23,7 @@ const FullPost = () => {
       <p>{post.body}</p>
 
       <p className="postCredit">
+        <Link to={`/post/edit/${post.id}`}>Edit post</Link>
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
