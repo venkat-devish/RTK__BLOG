@@ -23,7 +23,7 @@ const FullPost = () => {
       <p>{post.body}</p>
 
       <p className="postCredit">
-        <Link to={`/post/edit/${post.id}`}>Edit post</Link>
+        <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
