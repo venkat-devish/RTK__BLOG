@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 import { sub } from "date-fns";
+import { useParams } from "react-router-dom";
 
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
@@ -20,6 +21,26 @@ export const addNewPost = createAsyncThunk(
   async (myPost) => {
     const response = await axios.post(POSTS_URL, myPost);
     return response.data;
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  "posts/updatePost",
+  async (updatedPost) => {
+    const { id } = updatedPost;
+    const response = await axios.put(`${POSTS_URL}/${id}`, updatedPost);
+    console.log(response);
+    return response.data;
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (deletedPost) => {
+    const { id } = deletedPost;
+    const response = await axios.delete(`${POSTS_URL}/${id}`, deletedPost);
+    if (response.status === 200) return deletedPost;
+    return `${response.status} ${response.statusText}`;
   }
 );
 
@@ -96,6 +117,23 @@ const postsSlice = createSlice({
           coffee: 0,
         };
         state.posts.push(action.payload);
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        if (!action.payload) return;
+
+        const { id } = action.payload;
+        action.payload.date = new Date().toISOString();
+        const posts = state.posts.filter((post) => post.id !== id);
+        state.posts = [...posts, action.payload];
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        if (!action.payload) {
+          console.log("Could not delete the post");
+          return;
+        }
+        const { id } = action.payload;
+        const posts = state.posts.filter((post) => post.id != id);
+        state.posts = posts;
       });
   },
 });
@@ -104,6 +142,7 @@ export const { postAdded, reactionAdded } = postsSlice.actions;
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;
 export const getPostError = (state) => state.posts.error;
-export const selectPostById = (state, postId) =>
-  state.posts.posts.find((post) => post.id === postId);
+export const selectPostById = (state, postId) => {
+  return state.posts.posts.find((post) => post.id === postId);
+};
 export default postsSlice.reducer;
