@@ -112,7 +112,11 @@ const EditPostForm = () => {
         <button disabled={!canSave} type="submit">
           Save Post
         </button>
-        <button disabled={!canSave} onClick={deletePostHandler}>
+        <button
+          className="deleteButton"
+          disabled={!canSave}
+          onClick={deletePostHandler}
+        >
           Delete Post
         </button>
       </form>
