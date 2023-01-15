@@ -5,12 +5,17 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { fetchUsers } from "./app/usersSlice";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 store.dispatch(fetchUsers());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/*" element={<App />} />
+      </Routes>
+    </Router>
   </Provider>
 );
