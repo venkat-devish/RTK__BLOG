@@ -19,7 +19,7 @@ const AddNewPost = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(addNewPost({ id: nanoid(), title, content, userId }));
+    dispatch(addNewPost({ id: nanoid(), title, body: content, userId }));
     setTitle("");
     setContent("");
     setuserId("");

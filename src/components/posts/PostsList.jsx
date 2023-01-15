@@ -17,7 +17,6 @@ const PostsList = () => {
   const postsStatus = useSelector(getPostsStatus);
   const postsError = useSelector(getPostsError);
   const addPostStatus = useSelector(getPostAddedStatus);
-  console.log(addPostStatus);
   useEffect(() => {
     if (postsStatus === "idle") {
       dispatch(fetchPosts());
@@ -28,13 +27,13 @@ const PostsList = () => {
   if (postsStatus === "loading") {
     content = (
       <div className="spinner">
-        <MetroSpinner size={75} color="#fff" />
+        <MetroSpinner size={75} color="#333" />
       </div>
     );
   } else if (addPostStatus === "loading") {
     content = (
       <div className="spinner">
-        <PongSpinner size={100} color="#fff" />
+        <PongSpinner size={100} color="#333" />
       </div>
     );
   } else if (postsStatus === "success") {
